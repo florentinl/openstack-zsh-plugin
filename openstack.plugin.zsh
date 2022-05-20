@@ -15,16 +15,19 @@ alias ocsl='openstack compute service list'
 # server
 alias os='openstack server'
 alias osl='openstack server list'
-alias oss='openstack server show'
 alias ossh='openstack server show'
 alias ossta='openstack server start'
 alias ossto='openstack server stop'
 alias osr='openstack server reboot'
+alias osd='openstack server delete'
+function osip {
+  openstack server show $@ --format yaml | yq ".addresses"
+}
 function oscdl {
   openstack server create \
       --image "Debian 11 (Bullseye)" \
       --boot-from-volume 5 \
-      --key-name $1 \
+      --key-name flow \
       --flavor $2 \
       --network $3 \
       $4
